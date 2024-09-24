@@ -1,0 +1,110 @@
+c-menu {
+  position: relative;
+  display : block;
+}
+
+c-menu-items {
+  --translate-x: 0;
+  --translate-y: 0;
+  --scale      : 1;
+  --offset     : 0px;
+
+  position : absolute;
+  display  : block;
+  transform: translate(var(--translate-x), var(--translate-y)) scale(var(--scale));
+
+}
+
+c-menu-items:not([data-active]) {
+  pointer-events: none;
+  opacity       : 0;
+
+}
+
+c-menu-items[placement^="top"] {
+  bottom       : 100%;
+  margin-bottom: var(--offset, 0);
+}
+
+c-menu-items[placement="top"] {
+  --translate-x: -50%;
+
+  left            : 50%;
+  transform-origin: bottom;
+}
+
+c-menu-items[placement="top-start"] {
+  left            : 0;
+  transform-origin: bottom left;
+}
+
+c-menu-items[placement="top-end"] {
+  right           : 0;
+  transform-origin: bottom right;
+}
+
+c-menu-items[placement^="bottom"] {
+  top       : 100%;
+  margin-top: var(--offset, 0);
+}
+
+c-menu-items[placement="bottom"] {
+  --translate-x: -50%;
+
+  left            : 50%;
+  transform-origin: top;
+}
+
+c-menu-items[placement="bottom-start"] {
+  left            : 0;
+  transform-origin: top left;
+}
+
+c-menu-items[placement="bottom-end"] {
+  right           : 0;
+  transform-origin: bottom right;
+}
+
+c-menu-items[placement^="right"] {
+  left       : 100%;
+  margin-left: var(--offset, 0);
+}
+
+c-menu-items[placement="right"] {
+  --translate-y: -50%;
+
+  top             : 50%;
+  transform-origin: left;
+}
+
+c-menu-items[placement="right-start"] {
+  top             : 0;
+  transform-origin: top left;
+}
+
+c-menu-items[placement="right-end"] {
+  bottom          : 0;
+  transform-origin: bottom left;
+}
+
+c-menu-items[placement^="left"] {
+  right       : 100%;
+  margin-right: var(--offset, 0);
+}
+
+c-menu-items[placement="left"] {
+  --translate-y: -50%;
+
+  top             : 50%;
+  transform-origin: right;
+}
+
+c-menu-items[placement="left-start"] {
+  top             : 0;
+  transform-origin: top right;
+}
+
+c-menu-items[placement="left-end"] {
+  bottom          : 0;
+  transform-origin: bottom right;
+}

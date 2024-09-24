@@ -1,0 +1,23 @@
+{
+  "name": "@qpokychuk/menu",
+  "version": "1.0.0",
+  "author": "qpokycHuk <serega990112@mail.ru>",
+  "type": "module",
+  "license": "ISC",
+  "main": "dist/index.umd.min.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "rollup": "^4.22.4",
+    "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "tslib": "^2.7.0",
+    "typescript": "5.6.2"
+  }
+}
