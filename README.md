@@ -6,6 +6,12 @@
 npm install @qpokychuk/wc-menu
 ```
 
+```js
+import menu from '@qpokychuk/wc-menu'
+import '@qpokychuk/wc-menu/dist/index.css'
+
+menu.register()
+```
 
 
 

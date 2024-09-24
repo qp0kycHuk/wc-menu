@@ -39,11 +39,13 @@ class Menu extends Dispatcher {
     }
   }
 
-  open() {
+  open(event: Event) {
+    event.stopPropagation()
     if (!this.opened) this.toggle()
   }
 
-  close() {
+  close(event: Event) {
+    event.stopPropagation()
     if (this.opened) this.toggle()
   }
 

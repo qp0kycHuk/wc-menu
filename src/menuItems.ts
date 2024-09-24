@@ -9,18 +9,18 @@ export class MenuItems extends MenuChild {
 
     this.menu.items = this
 
-    this.menu.addEventListener(ActionTypes.OpenMenu, this.show.bind(this))
-    this.menu.addEventListener(ActionTypes.CloseMenu, this.hide.bind(this))
+    this.menu.addEventListener(ActionTypes.OpenMenu, this.render.bind(this))
+    this.menu.addEventListener(ActionTypes.CloseMenu, this.render.bind(this))
 
     this.placement = (this.getAttribute('placement') || 'bottom-start') as PlacementString
   }
 
-  show() {
-    this.setAttribute('data-active', '')
-  }
-
-  hide() {
-    this.removeAttribute('data-active')
+  render(){
+    if (this.menu.opened) {
+      this.setAttribute('data-active', '')
+    } else {
+      this.removeAttribute('data-active')
+    }
   }
 }
 
