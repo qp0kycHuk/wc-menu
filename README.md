@@ -2,6 +2,12 @@
 
 Простой веб компонент меню
 
+[Демонстрация](https://qp0kychuk.github.io/wc-menu/)
+
+[Github](https://github.com/qp0kycHuk/wc-menu)
+
+[Поддержать автора](https://www.tinkoff.ru/rm/yuferov.sergey18/NC17C11734)
+
 ### Установка
 
 ```bash
@@ -153,5 +159,3 @@ body.c-menu-opened {
 }
 ```
 
-
-[Поддержать автора](https://www.tinkoff.ru/rm/yuferov.sergey18/NC17C11734)
