@@ -12,7 +12,7 @@ c-menu-items {
   position : absolute;
   display  : block;
   transform: translate(var(--translate-x), var(--translate-y)) scale(var(--scale));
-
+  transform-origin: top left;
 }
 
 c-menu-items:not([data-active]) {
