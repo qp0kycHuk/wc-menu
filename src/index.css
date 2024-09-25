@@ -29,6 +29,8 @@ c-menu-items:not([placement]) {
   transform-origin: top left;
 }
 
+c-menu[action="hover"] c-menu-items[placement=""]::before,
+c-menu[action="hover"] c-menu-items:not([placement])::before,
 c-menu[action="hover"] c-menu-items::before {
   content: '';
   position: absolute;
@@ -69,6 +71,8 @@ c-menu-items[placement^="bottom"] {
   margin-top: var(--offset, 0);
 }
 
+c-menu[action="hover"] c-menu-items[placement=""]::before,
+c-menu[action="hover"] c-menu-items:not([placement])::before,
 c-menu[action="hover"] c-menu-items[placement^="bottom"]::before {
   bottom: calc(100% - 2px);
   width: 100%;
