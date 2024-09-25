@@ -1,40 +1,47 @@
 c-menu {
   position: relative;
-  display : block;
+  display: block;
 }
 
 c-menu-items {
   --translate-x: 0;
   --translate-y: 0;
-  --scale      : 1;
-  --offset     : 0px;
+  --scale: 1;
+  --offset: 0px;
 
-  position : absolute;
-  display  : block;
+  position: absolute;
+  display: block;
   transform: translate(var(--translate-x), var(--translate-y)) scale(var(--scale));
-  transform-origin: top left;
+
 }
 
 c-menu-items:not([data-active]) {
   pointer-events: none;
-  opacity       : 0;
+  opacity: 0;
 
 }
 
+c-menu-items:not([placement]) {
+  top: 100%;
+  margin-top: var(--offset, 0);
+  left: 0;
+  transform-origin: top left;
+}
+
 c-menu[action="hover"] c-menu-items::before {
-  content : '';
+  content: '';
   position: absolute;
 }
 
 
 c-menu-items[placement^="top"] {
-  bottom       : 100%;
+  bottom: 100%;
   margin-bottom: var(--offset, 0);
 }
 
 c-menu[action="hover"] c-menu-items[placement^="top"]::before {
-  top   : calc(100% - 2px);
-  width : 100%;
+  top: calc(100% - 2px);
+  width: 100%;
   height: calc(4px + var(--offset, 0));
 }
 
@@ -42,101 +49,101 @@ c-menu[action="hover"] c-menu-items[placement^="top"]::before {
 c-menu-items[placement="top"] {
   --translate-x: -50%;
 
-  left            : 50%;
+  left: 50%;
   transform-origin: bottom;
 }
 
 c-menu-items[placement="top-start"] {
-  left            : 0;
+  left: 0;
   transform-origin: bottom left;
 }
 
 c-menu-items[placement="top-end"] {
-  right           : 0;
+  right: 0;
   transform-origin: bottom right;
 }
 
 c-menu-items[placement^="bottom"] {
-  top       : 100%;
+  top: 100%;
   margin-top: var(--offset, 0);
 }
 
 c-menu[action="hover"] c-menu-items[placement^="bottom"]::before {
   bottom: calc(100% - 2px);
-  width : 100%;
+  width: 100%;
   height: calc(4px + var(--offset, 0));
 }
 
 c-menu-items[placement="bottom"] {
   --translate-x: -50%;
 
-  left            : 50%;
+  left: 50%;
   transform-origin: top;
 }
 
 c-menu-items[placement="bottom-start"] {
-  left            : 0;
+  left: 0;
   transform-origin: top left;
 }
 
 c-menu-items[placement="bottom-end"] {
-  right           : 0;
+  right: 0;
   transform-origin: bottom right;
 }
 
 c-menu-items[placement^="right"] {
-  left       : 100%;
+  left: 100%;
   margin-left: var(--offset, 0);
 }
 
 c-menu[action="hover"] c-menu-items[placement^="right"]::before {
-  right : calc(100% - 2px);
+  right: calc(100% - 2px);
   height: 100%;
-  width : calc(4px + var(--offset, 0));
+  width: calc(4px + var(--offset, 0));
 }
 
 c-menu-items[placement="right"] {
   --translate-y: -50%;
 
-  top             : 50%;
+  top: 50%;
   transform-origin: left;
 }
 
 c-menu-items[placement="right-start"] {
-  top             : 0;
+  top: 0;
   transform-origin: top left;
 }
 
 c-menu-items[placement="right-end"] {
-  bottom          : 0;
+  bottom: 0;
   transform-origin: bottom left;
 }
 
 c-menu-items[placement^="left"] {
-  right       : 100%;
+  right: 100%;
   margin-right: var(--offset, 0);
 }
 
 c-menu[action="hover"] c-menu-items[placement^="left"]::before {
-  left  : calc(100% - 2px);
+  left: calc(100% - 2px);
   height: 100%;
-  width : calc(4px + var(--offset, 0));
+  width: calc(4px + var(--offset, 0));
 }
 
 c-menu-items[placement="left"] {
   --translate-y: -50%;
 
-  top             : 50%;
+  top: 50%;
   transform-origin: right;
 }
 
 c-menu-items[placement="left-start"] {
-  top             : 0;
+  top: 0;
   transform-origin: top right;
 }
 
 c-menu-items[placement="left-end"] {
-  bottom          : 0;
+  bottom: 0;
   transform-origin: bottom right;
 }
 
@@ -144,97 +151,97 @@ c-menu-items[placement="over"] {
   --translate-x: -50%;
   --translate-y: -50%;
 
-  left            : 50%;
-  top             : 50%;
+  left: 50%;
+  top: 50%;
   transform-origin: center;
 
 }
 
 c-menu-items[placement*="over-top"] {
-  bottom       : 0;
+  bottom: 0;
   margin-bottom: calc(-1 * var(--offset, 0));
 }
 
 c-menu-items[placement="over-top"] {
   --translate-x: -50%;
 
-  left            : 50%;
+  left: 50%;
   transform-origin: bottom;
 }
 
 c-menu-items[placement="over-top-start"] {
-  left            : 0;
+  left: 0;
   transform-origin: bottom left;
 }
 
 c-menu-items[placement="over-top-end"] {
-  right           : 0;
+  right: 0;
   transform-origin: bottom right;
 }
 
 
 c-menu-items[placement*="over-bottom"] {
-  top          : 0;
+  top: 0;
   margin-bottom: calc(-1 * var(--offset, 0));
 }
 
 c-menu-items[placement="over-bottom"] {
   --translate-x: -50%;
 
-  left            : 50%;
+  left: 50%;
   transform-origin: top;
 }
 
 c-menu-items[placement="over-bottom-start"] {
-  left            : 0;
+  left: 0;
   transform-origin: top left;
 }
 
 c-menu-items[placement="over-bottom-end"] {
-  right           : 0;
+  right: 0;
   transform-origin: top right;
 }
 
 c-menu-items[placement*="over-left"] {
-  left       : 0;
+  left: 0;
   margin-left: calc(-1 * var(--offset, 0));
 }
 
 c-menu-items[placement="over-left"] {
   --translate-y: -50%;
 
-  top             : 50%;
+  top: 50%;
   transform-origin: left;
 }
 
 c-menu-items[placement="over-left-start"] {
-  top             : 0;
+  top: 0;
   transform-origin: top left;
 }
 
 c-menu-items[placement="over-left-end"] {
-  bottom          : 0;
+  bottom: 0;
   transform-origin: bottom left;
 }
 
 c-menu-items[placement*="over-right"] {
-  right       : 0;
+  right: 0;
   margin-right: calc(-1 * var(--offset, 0));
 }
 
 c-menu-items[placement="over-right"] {
   --translate-y: -50%;
 
-  top             : 50%;
+  top: 50%;
   transform-origin: right;
 }
 
 c-menu-items[placement="over-right-start"] {
-  top             : 0;
+  top: 0;
   transform-origin: top right;
 }
 
 c-menu-items[placement="over-right-end"] {
-  bottom          : 0;
+  bottom: 0;
   transform-origin: bottom right;
 }
