@@ -15,7 +15,7 @@ export class MenuItems extends MenuChild {
     this.placement = (this.getAttribute('placement') || 'bottom-start') as PlacementString
   }
 
-  render(){
+  render() {
     if (this.menu.opened) {
       this.setAttribute('data-active', '')
     } else {
@@ -34,4 +34,4 @@ export default { register }
 
 type Align = 'start' | 'end'
 type Placement = 'top' | 'right' | 'bottom' | 'left'
-type PlacementString = Placement | `${Placement}-${Align}`
+type PlacementString = Placement | `${Placement}-${Align}` | 'over' | `over-${Placement}` | `over-${Placement}-${Align}`

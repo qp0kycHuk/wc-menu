@@ -1,14 +1,16 @@
 import { MenuChild } from './menu'
-import { ActionTypes } from './utils'
+import { ActionTypes, handleEvent } from './utils'
 
 export class MenuItem extends MenuChild {
+  handleEvent = handleEvent
+
   connectedCallback() {
     super.connectedCallback()
 
-    this.addEventListener('click', this.clickHandler)
+    this.addEventListener('click', this)
   }
 
-  clickHandler() {
+  clickhandler() {
     this.dispatch(ActionTypes.CloseMenu)
   }
 }

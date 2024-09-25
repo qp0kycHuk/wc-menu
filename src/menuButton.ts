@@ -1,33 +1,34 @@
 import { MenuChild } from './menu'
-import { ActionTypes, Keys } from './utils'
+import { ActionTypes, handleEvent, Keys } from './utils'
 
 export class MenuButton extends MenuChild {
+  handleEvent = handleEvent
+
   connectedCallback() {
     super.connectedCallback()
 
     this.menu.addEventListener(ActionTypes.OpenMenu, this.render.bind(this))
     this.menu.addEventListener(ActionTypes.CloseMenu, this.render.bind(this))
 
-
-    this.addEventListener('click', this.clickHandler.bind(this))
-    this.addEventListener('keydown', this.keyDownHandler.bind(this))
+    this.addEventListener('click', this)
+    this.addEventListener('keydown', this)
     this.tabIndex = 0
     this.role = 'button'
     this.ariaExpanded = 'true'
     this.ariaPressed = 'true'
   }
 
-  clickHandler() {
+  clickhandler() {
     this.dispatch(this.menu.opened ? ActionTypes.CloseMenu : ActionTypes.OpenMenu)
   }
 
-  keyDownHandler(event: KeyboardEvent) {
+  keydownhandler(event: KeyboardEvent) {
     if (event.key === Keys.Space || event.key === Keys.Enter) {
       this.dispatch(this.menu.opened ? ActionTypes.CloseMenu : ActionTypes.OpenMenu)
     }
   }
 
-  render(){
+  render() {
     if (this.menu.opened) {
       this.setAttribute('data-active', '')
     } else {

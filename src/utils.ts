@@ -8,6 +8,11 @@ export class Dispatcher extends HTMLElement {
   }
 }
 
+export function handleEvent(event: Event) {
+  // @ts-ignore
+  this[event.type + 'handler']?.(event)
+}
+
 export enum ActionTypes {
   OpenMenu = 'c-menu:open',
   CloseMenu = 'c-menu:close',

@@ -1,14 +1,24 @@
 import { MenuItems } from './menuItems'
-import { Dispatcher, ActionTypes, Keys } from './utils'
+import { Dispatcher, ActionTypes, Keys, handleEvent } from './utils'
+import { detectTouch } from 'detect-touch'
 
 class Menu extends Dispatcher {
   opened = false
   items?: MenuItems
+  mouseOutTimeout?: NodeJS.Timeout
+  handleEvent = handleEvent
   shadow = document.createElement('c-menu-shadow')
+  action = 'click'
 
   connectedCallback() {
-    document.addEventListener('click', this.bindedClickHandler)
-    document.addEventListener('keyup', this.bindedKeyupHandler)
+    this.action = this.getAttribute('action') || this.action
+    document.addEventListener('click', this)
+    document.addEventListener('keyup', this)
+
+    if (this.action === 'hover') {
+      this.addEventListener('mouseover', this)
+      this.addEventListener('mouseout', this)
+    }
 
     this.addEventListener(ActionTypes.OpenMenu, this.open.bind(this))
     this.addEventListener(ActionTypes.CloseMenu, this.close.bind(this))
@@ -17,36 +27,81 @@ class Menu extends Dispatcher {
   }
 
   disconnectedCallback() {
-    document.removeEventListener('click', this.bindedClickHandler)
-    document.removeEventListener('keyup', this.bindedKeyupHandler)
+    document.removeEventListener('click', this)
+    document.removeEventListener('keyup', this)
   }
 
-  bindedClickHandler = this.clickHandler.bind(this)
-  clickHandler(event: MouseEvent) {
+  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+    if (name === 'action') {
+      if (newValue === 'hover' && oldValue !== 'hover') {
+        this.addEventListener('mouseover', this)
+        this.addEventListener('mouseout', this)
+      }
+
+      if (newValue !== 'hover' && oldValue === 'hover') {
+        this.removeEventListener('mouseover', this)
+        this.removeEventListener('mouseout', this)
+      }
+    }
+  }
+
+  clickhandler(event: MouseEvent) {
     const target = event.target as Element
     const isShadow = this.shadow === target
-    const isInner = this !== target && !this.contains(target) && this.items !== target && !this.items?.contains(target)
+    const isOuter = this !== target && !this.contains(target) && this.items !== target && !this.items?.contains(target)
 
-    if (this?.opened && (isShadow || isInner)) {
+    if (this?.opened && (isShadow || isOuter)) {
       this.dispatch(ActionTypes.CloseMenu)
     }
   }
 
-  bindedKeyupHandler = this.keyupHandler.bind(this)
-  keyupHandler(event: KeyboardEvent) {
+  keyuphandler(event: KeyboardEvent) {
     if (event.key === Keys.Escape) {
       this.dispatch(ActionTypes.CloseMenu)
     }
   }
 
+  mouseoverhandler(event: MouseEvent) {
+    if (detectTouch()) return
+
+    const target = event.target as Element
+    const relatedTarget = event.relatedTarget as Element
+
+    if ((this === target || this.contains(target)) && this !== relatedTarget && !this.contains(relatedTarget)) {
+      this.dispatch(ActionTypes.OpenMenu)
+    }
+  }
+
+  mouseouthandler(event: MouseEvent) {
+    if (detectTouch()) return
+
+    // timeout for menus with offset
+    // depricated - using css menu-items::before properity
+    this.mouseOutTimeout = setTimeout(() => {
+      const relatedTarget = event.relatedTarget as Element
+
+      if (this !== relatedTarget && !this.contains(relatedTarget)) {
+        this.dispatch(ActionTypes.CloseMenu)
+      }
+    }, 0)
+  }
+
   open(event: Event) {
     event.stopPropagation()
+    clearTimeout(this.mouseOutTimeout)
     if (!this.opened) this.toggle()
   }
 
   close(event: Event) {
     event.stopPropagation()
-    if (this.opened) this.toggle()
+
+    if (this.opened) {
+      const menus = Array.from(this.querySelectorAll<Menu>('c-menu'))
+
+      menus.forEach((menu) => menu.dispatch(ActionTypes.CloseMenu))
+
+      this.toggle()
+    }
   }
 
   toggle() {
