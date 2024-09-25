@@ -21,7 +21,7 @@ c-menu-items:not([data-active]) {
 
 }
 
-c-menu-items:not([placement=""]),
+c-menu-items[placement=""],
 c-menu-items:not([placement]) {
   top: 100%;
   margin-top: var(--offset, 0);
