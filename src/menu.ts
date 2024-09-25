@@ -30,7 +30,7 @@ class Menu extends Dispatcher {
     document.removeEventListener('click', this)
     document.removeEventListener('keyup', this)
   }
-
+  static observedAttributes = ['action']
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (name === 'action') {
       if (newValue === 'hover' && oldValue !== 'hover') {
