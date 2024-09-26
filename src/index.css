@@ -208,45 +208,45 @@ c-menu-items[placement="over-bottom-end"] {
 }
 
 c-menu-items[placement*="over-left"] {
-  left: 0;
-  margin-left: calc(-1 * var(--offset, 0));
+  right: 0;
+  margin-right: calc(-1 * var(--offset, 0));
 }
 
 c-menu-items[placement="over-left"] {
   --translate-y: -50%;
 
   top: 50%;
-  transform-origin: left;
+  transform-origin: right;
 }
 
 c-menu-items[placement="over-left-start"] {
   top: 0;
-  transform-origin: top left;
+  transform-origin: top right;
 }
 
 c-menu-items[placement="over-left-end"] {
   bottom: 0;
-  transform-origin: bottom left;
+  transform-origin: bottom right;
 }
 
 c-menu-items[placement*="over-right"] {
-  right: 0;
-  margin-right: calc(-1 * var(--offset, 0));
+  left: 0;
+  margin-left: calc(-1 * var(--offset, 0));
 }
 
 c-menu-items[placement="over-right"] {
   --translate-y: -50%;
 
   top: 50%;
-  transform-origin: right;
+  transform-origin: left;
 }
 
 c-menu-items[placement="over-right-start"] {
   top: 0;
-  transform-origin: top right;
+  transform-origin: top left;
 }
 
 c-menu-items[placement="over-right-end"] {
   bottom: 0;
-  transform-origin: bottom right;
+  transform-origin: bottom left;
 }
