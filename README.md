@@ -2,11 +2,11 @@
 
 Простой веб компонент меню
 
-[Демонстрация](https://qp0kychuk.github.io/wc-menu/)
+[Демонстрация](https://qp0kychuk.github.io/wc-menu/){:target="_blank"} 
 
-[Github](https://github.com/qp0kycHuk/wc-menu)
+[Github](https://github.com/qp0kycHuk/wc-menu){:target="_blank"} 
 
-[Поддержать автора](https://www.tinkoff.ru/rm/yuferov.sergey18/NC17C11734)
+[Поддержать автора](https://www.tinkoff.ru/rm/yuferov.sergey18/NC17C11734){:target="_blank"} 
 
 ### Установка
 
