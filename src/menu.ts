@@ -11,6 +11,8 @@ class Menu extends Dispatcher {
   action = 'click'
 
   connectedCallback() {
+    console.log('connectedCallback');
+    
     this.action = this.getAttribute('action') || this.action
     document.addEventListener('click', this)
     document.addEventListener('keyup', this)
@@ -18,6 +20,11 @@ class Menu extends Dispatcher {
     if (this.action === 'hover') {
       this.addEventListener('mouseover', this)
       this.addEventListener('mouseout', this)
+    }
+
+    if (this.action === 'context') {
+      this.removeEventListener('contextmenu', this)
+      this.addEventListener('contextmenu', this)
     }
 
     this.addEventListener(ActionTypes.OpenMenu, this.open.bind(this))
@@ -43,17 +50,45 @@ class Menu extends Dispatcher {
         this.removeEventListener('mouseover', this)
         this.removeEventListener('mouseout', this)
       }
+
+      if (newValue === 'context' && oldValue !== 'context') {
+        this.removeEventListener('contextmenu', this)
+        this.addEventListener('contextmenu', this)
+      }
+
+      if (newValue !== 'context' && oldValue === 'context') {
+        this.removeEventListener('contextmenu', this)
+      }
     }
   }
 
   clickhandler(event: MouseEvent) {
     const target = event.target as Element
     const isShadow = this.shadow === target
-    const isOuter = this !== target && !this.contains(target) && this.items !== target && !this.items?.contains(target)
+    const isItems = this.items === target || this.items?.contains(target)
+    const isMenu = this === target || this?.contains(target)
+    const isOuter = !isMenu && !isItems
+    const isCloseContext = this.action === 'context' && !isItems
 
-    if (this?.opened && (isShadow || isOuter)) {
+    if (this?.opened && (isShadow || isOuter || isCloseContext)) {
       this.dispatch(ActionTypes.CloseMenu)
     }
+  }
+
+  contextmenuhandler(event: MouseEvent) {    
+    event.preventDefault()
+    if(this.opened) {
+      this.dispatch(ActionTypes.CloseMenu)
+
+      return
+    }
+
+    if(this.items) {
+      this.items.style.setProperty('--x', event.layerX + 'px')
+      this.items.style.setProperty('--y', event.layerY + 'px')
+    }
+ 
+    this.dispatch(ActionTypes.OpenMenu)
   }
 
   keyuphandler(event: KeyboardEvent) {
