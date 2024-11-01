@@ -102,7 +102,7 @@ c-menu-items[placement="bottom-start"] {
 
 c-menu-items[placement="bottom-end"] {
   right: var(--x);
-  transform-origin: bottom right;
+  transform-origin: top right;
 }
 
 c-menu-items[placement^="right"] {
